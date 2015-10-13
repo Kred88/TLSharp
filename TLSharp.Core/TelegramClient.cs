@@ -101,9 +101,17 @@ namespace TLSharp.Core
 			return importedUser == null ? (int?) null : ((UserContactConstructor) importedUser).id;
 		}
 
-        public async Task SendMessage(int id, string message)
+        public async Task SendContactMessage(int user_id, string message)
         {
-            var request = new SendMessageRequest(new InputPeerContactConstructor(id), message);
+            var request = new SendMessageRequest(new InputPeerContactConstructor(user_id), message);
+
+            await _sender.Send(request);
+            await _sender.Recieve(request);
+        }
+
+        public async Task SendChatMessage(int chat_id, string message)
+        {
+            var request = new SendMessageRequest(new InputPeerChatConstructor(chat_id), message);
 
             await _sender.Send(request);
             await _sender.Recieve(request);
