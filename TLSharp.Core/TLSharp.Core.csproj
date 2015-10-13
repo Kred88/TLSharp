@@ -70,6 +70,7 @@
     <Compile Include="Requests\ImportContactRequest.cs" />
     <Compile Include="Requests\InitConnectionRequest.cs" />
     <Compile Include="Requests\MTProtoRequest.cs" />
+    <Compile Include="Requests\GetFullUserRequest.cs" />
     <Compile Include="Requests\SendMessageRequest.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="TelegramClient.cs" />
