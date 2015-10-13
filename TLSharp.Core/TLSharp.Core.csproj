@@ -67,6 +67,8 @@
     <Compile Include="Requests\AuthCheckPhoneRequest.cs" />
     <Compile Include="Requests\AuthSendCodeRequest.cs" />
     <Compile Include="Requests\AuthSignInRequest.cs" />
+    <Compile Include="Requests\ContactsSearchRequest.cs" />
+    <Compile Include="Requests\CreateChatRequest.cs" />
     <Compile Include="Requests\ImportContactRequest.cs" />
     <Compile Include="Requests\InitConnectionRequest.cs" />
     <Compile Include="Requests\MTProtoRequest.cs" />
