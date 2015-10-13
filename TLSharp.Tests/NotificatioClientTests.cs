@@ -97,7 +97,7 @@ namespace TLSharp.Tests
 		}
 
 		[TestMethod]
-		public async Task SendMessage()
+		public async Task SendContactMessage()
 		{
 			// User should be already authenticated!
 
