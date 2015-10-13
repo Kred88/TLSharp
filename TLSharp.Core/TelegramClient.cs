@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using TLSharp.Core.Auth;
@@ -101,13 +101,23 @@ namespace TLSharp.Core
 			return importedUser == null ? (int?) null : ((UserContactConstructor) importedUser).id;
 		}
 
-		public async Task SendMessage(int id, string message)
-		{
-			var request = new SendMessageRequest(new InputPeerContactConstructor(id), message );
+        public async Task SendMessage(int id, string message)
+        {
+            var request = new SendMessageRequest(new InputPeerContactConstructor(id), message);
 
-			await _sender.Send(request);
-			await _sender.Recieve(request);
+            await _sender.Send(request);
+            await _sender.Recieve(request);
+        }
 
-		}
+        public async Task<UserFullConstructor> GetFullUserContract(int id)
+        {
+            var request = new GetFullUserRequest(new InputUserContactConstructor(id));
+
+            await _sender.Send(request);
+            await _sender.Recieve(request);
+
+            return ((UserFullConstructor)request.userfull);
+
+        }
 	}
 }
