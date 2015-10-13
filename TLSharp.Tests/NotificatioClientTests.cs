@@ -111,7 +111,7 @@ namespace TLSharp.Tests
 
 			Assert.IsNotNull(res);
 
-			await client.SendMessage(res.Value, "Test message from TelegramClient");
+			await client.SendContactMessage(res.Value, "Test message from TelegramClient");
 		}
 
 		[TestMethod]
