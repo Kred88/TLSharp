@@ -109,7 +109,7 @@ namespace TLSharp.Core
             await _sender.Recieve(request);
         }
 
-        public async Task<UserFullConstructor> GetFullUserContract(int id)
+        public async Task<UserFullConstructor> GetFullUserContact(int id)
         {
             var request = new GetFullUserRequest(new InputUserContactConstructor(id));
 
@@ -117,7 +117,16 @@ namespace TLSharp.Core
             await _sender.Recieve(request);
 
             return ((UserFullConstructor)request.userfull);
+        }
 
+        public async Task<UserContactConstructor> getUserByUsername(string username)
+        {
+            var request = new ContactsSearchRequest(username, 1);
+
+            await _sender.Send(request);
+            await _sender.Recieve(request);
+            
+            return ((UserContactConstructor)request.users.FirstOrDefault());
         }
 	}
 }
