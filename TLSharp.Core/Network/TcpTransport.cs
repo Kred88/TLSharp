@@ -8,7 +8,15 @@ namespace TLSharp.Core.Network
 {
 	public class TcpTransport : IDisposable
 	{
-		private const string defaultConnectionAddress = "91.108.56.165";
+		//ORIGINAL:
+		//private const string defaultConnectionAddress = "91.108.56.165";
+
+        	//TEST:
+        	//private const string defaultConnectionAddress = "149.154.167.40";
+	
+        	//PRODUCTION:
+        	private const string defaultConnectionAddress = "149.154.167.50";
+        	
 		private const int defaultConnectionPort = 443;
 		private readonly TcpClient _tcpClient;
 		private int sendCounter = 0;
