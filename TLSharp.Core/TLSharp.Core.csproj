@@ -68,6 +68,7 @@
     <Compile Include="Requests\AuthSendCodeRequest.cs" />
     <Compile Include="Requests\AuthSignInRequest.cs" />
     <Compile Include="Requests\ContactsSearchRequest.cs" />
+    <Compile Include="Requests\GetDifferenceRequest.cs" />
     <Compile Include="Requests\UnregisterDeviceRequest.cs" />
     <Compile Include="Requests\RegisterDeviceRequest.cs" />
     <Compile Include="Requests\CreateChatRequest.cs" />
