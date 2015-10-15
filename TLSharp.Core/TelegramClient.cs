@@ -136,5 +136,16 @@ namespace TLSharp.Core
             
             return ((UserContactConstructor)request.users.FirstOrDefault());
         }
+        
+        public async Task<ConfigConstructor> getConfig()
+        {
+            var request = new GetConfigRequest();
+
+            await _sender.Send(request);
+            await _sender.Recieve(request);
+
+            return ((ConfigConstructor)request.configuration);
+        }
+        
 	}
 }
