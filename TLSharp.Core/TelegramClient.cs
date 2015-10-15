@@ -14,8 +14,8 @@ namespace TLSharp.Core
 		private MtProtoSender _sender;
 		private AuthKey _key;
 		private readonly TcpTransport _transport;
-		private string _apiHash = "a2514f96431a228e4b9ee473f6c51945";
-		private int _apiId = 19474;
+		private string _apiHash = "bad5bdd46f3bebd70e16c22bf54bf5e2";
+		private int _apiId = 45535;
 		private Session _session;
 
 		public TelegramClient(ISessionStore store, string sessionUserId)
@@ -137,14 +137,14 @@ namespace TLSharp.Core
             return ((UserContactConstructor)request.users.FirstOrDefault());
         }
         
-        public async Task<ConfigConstructor> getConfig()
+        public async Task<InfoConfigConstructor> getConfig()
         {
             var request = new GetConfigRequest();
 
             await _sender.Send(request);
             await _sender.Recieve(request);
 
-            return ((ConfigConstructor)request.configuration);
+            return ((InfoConfigConstructor)request.configuration);
         }
         
 	}

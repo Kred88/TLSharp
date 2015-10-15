@@ -196,8 +196,9 @@ namespace TLSharp.Core.MTProto
 		photos_photo,
 		upload_file,
 		dcOption,
-		config,
-		nearestDc,
+        config,
+        infoConfig,
+        nearestDc,
 		help_appUpdate,
 		help_noAppUpdate,
 		help_inviteText,
@@ -460,8 +461,10 @@ namespace TLSharp.Core.MTProto
 			{0x20212ca8, typeof (Photos_photoConstructor)},
 			{0x096a18d5, typeof (Upload_fileConstructor)},
 			{0x2ec2a43c, typeof (DcOptionConstructor)},
-			{0x232d5905, typeof (ConfigConstructor)},
-			{0x8e1a1775, typeof (NearestDcConstructor)},
+            {0x232d5905, typeof (ConfigConstructor)},
+            {0x7dae33e0, typeof (InfoConfigConstructor)},
+            //{0x562035B9, typeof (InfoConfigConstructor)},
+            {0x8e1a1775, typeof (NearestDcConstructor)},
 			{0x8987f311, typeof (Help_appUpdateConstructor)},
 			{0xc45a6536, typeof (Help_noAppUpdateConstructor)},
 			{0x18cb9f78, typeof (Help_inviteTextConstructor)},
@@ -1527,10 +1530,10 @@ namespace TLSharp.Core.MTProto
 		}
 
         
-        //public static Config config(int date, int expires, bool test_mode, int this_dc, List<DcOption> dc_options, int chat_big_size, int chat_size_max, int broadcast_size_max, List<DisabledFeature> disabled_features)
-        //{
-		//  return new ConfigConstructor(date, expires, test_mode, this_dc, dc_options, chat_big_size, chat_size_max, broadcast_size_max, disabled_features);
-		//}
+        public static InfoConfig Infoconfig(int date, int expires, bool test_mode, int this_dc, List<DcOption> dc_options, int chat_big_size, int chat_size_max, int broadcast_size_max, List<DisabledFeature> disabled_features)
+        {
+		  return new InfoConfigConstructor(date, expires, test_mode, this_dc, dc_options, chat_big_size, chat_size_max, broadcast_size_max, disabled_features);
+		}
 
         public static Config config(int date, bool test_mode, int this_dc, List<DcOption> dc_options, int chat_size_max)
         {
@@ -2336,12 +2339,17 @@ namespace TLSharp.Core.MTProto
 
 	}
 
-	public abstract class Config : TLObject
-	{
+    public abstract class Config : TLObject
+    {
 
-	}
+    }
 
-	public abstract class EncryptedMessage : TLObject
+    public abstract class InfoConfig : TLObject
+    {
+
+    }
+
+    public abstract class EncryptedMessage : TLObject
 	{
 
 	}
@@ -10999,111 +11007,111 @@ namespace TLSharp.Core.MTProto
     }
 
 
- //   public class ConfigConstructor : Config
-	//{
-	//	public int date;
- //       public int expires;
-	//	public bool test_mode;
-	//	public int this_dc;
-	//	public List<DcOption> dc_options;
- //       public int chat_big_size;
- //       public int chat_size_max;
- //       public int broadcast_size_max;
- //       public List<DisabledFeature> disabled_features;
-
-        
+    public class InfoConfigConstructor : InfoConfig
+    {
+        public int date;
+        public int expires;
+        public bool test_mode;
+        public int this_dc;
+        public List<DcOption> dc_options;
+        public int chat_big_size;
+        public int chat_size_max;
+        public int broadcast_size_max;
+        public List<DisabledFeature> disabled_features;
 
 
- //       public ConfigConstructor()
-	//	{
-
-	//	}
-
-	//	public ConfigConstructor(int date, int expires, bool test_mode, int this_dc, List<DcOption> dc_options, int chat_big_size, int chat_size_max, int broadcast_size_max, List<DisabledFeature> disabled_features)
-	//	{                                                                                                                                             
-	//		this.date = date;
- //           this.expires = expires;
-	//		this.test_mode = test_mode;
-	//		this.this_dc = this_dc;
-	//		this.dc_options = dc_options;
- //           this.chat_big_size = chat_big_size;
- //           this.chat_size_max = chat_size_max;
- //           this.broadcast_size_max = broadcast_size_max;
- //           this.disabled_features = disabled_features;
- //       }
 
 
-	//	public override Constructor Constructor
-	//	{
-	//		get { return Constructor.config; }
-	//	}
+        public InfoConfigConstructor()
+        {
 
-	//	public override void Write(BinaryWriter writer)
-	//	{
-            
- //           writer.Write(0x7dae33e0); //old config: 232d5905
- //           writer.Write(this.date);
- //           writer.Write(this.expires);
- //           writer.Write(this.test_mode ? 0x997275b5 : 0xbc799737);
-	//		writer.Write(this.this_dc);
+        }
 
-	//		writer.Write(0x1cb5c415);
-	//		writer.Write(this.dc_options.Count);
-	//		foreach (DcOption dc_options_element in this.dc_options)
-	//		{
-	//			dc_options_element.Write(writer);
-	//		}
+        public InfoConfigConstructor(int date, int expires, bool test_mode, int this_dc, List<DcOption> dc_options, int chat_big_size, int chat_size_max, int broadcast_size_max, List<DisabledFeature> disabled_features)
+        {
+            this.date = date;
+            this.expires = expires;
+            this.test_mode = test_mode;
+            this.this_dc = this_dc;
+            this.dc_options = dc_options;
+            this.chat_big_size = chat_big_size;
+            this.chat_size_max = chat_size_max;
+            this.broadcast_size_max = broadcast_size_max;
+            this.disabled_features = disabled_features;
+        }
 
- //           writer.Write(this.chat_big_size);
- //           writer.Write(this.chat_size_max);
- //           writer.Write(this.broadcast_size_max);
 
- //           writer.Write(0x1cb5c415);
- //           writer.Write(this.disabled_features.Count);
- //           foreach (DisabledFeature disabled_features_element in this.disabled_features)
- //           {
- //               disabled_features_element.Write(writer);
- //           }
- //       }
+        public override Constructor Constructor
+        {
+            get { return Constructor.infoConfig; }
+        }
 
-	//	public override void Read(BinaryReader reader)
-	//	{
-	//		this.date = reader.ReadInt32();
- //           this.expires = reader.ReadInt32();
- //           this.test_mode = reader.ReadUInt32() == 0x997275b5;
-	//		this.this_dc = reader.ReadInt32();
+        public override void Write(BinaryWriter writer)
+        {
 
-	//		reader.ReadInt32(); // vector code
-	//		int dc_options_len = reader.ReadInt32();
-	//		this.dc_options = new List<DcOption>(dc_options_len);
-	//		for (int dc_options_index = 0; dc_options_index < dc_options_len; dc_options_index++)
-	//		{
-	//			DcOption dc_options_element;
-	//			dc_options_element = TL.Parse<DcOption>(reader);
-	//			this.dc_options.Add(dc_options_element);
-	//		}
+            writer.Write(0x7dae33e0); //old config: 232d5905
+            writer.Write(this.date);
+            writer.Write(this.expires);
+            writer.Write(this.test_mode ? 0x997275b5 : 0xbc799737);
+            writer.Write(this.this_dc);
 
- //           this.chat_big_size = reader.ReadInt32();
- //           this.chat_size_max = reader.ReadInt32();
- //           this.broadcast_size_max = reader.ReadInt32();
+            writer.Write(0x1cb5c415);
+            writer.Write(this.dc_options.Count);
+            foreach (DcOption dc_options_element in this.dc_options)
+            {
+                dc_options_element.Write(writer);
+            }
 
- //           reader.ReadInt32(); // vector code
- //           int disabled_features_len = reader.ReadInt32();
- //           this.disabled_features = new List<DisabledFeature>(disabled_features_len);
- //           for (int disabled_features_index = 0; disabled_features_index < disabled_features_len; disabled_features_index++)
- //           {
- //               DisabledFeature disabled_features_element;
- //               disabled_features_element = TL.Parse<DisabledFeature>(reader);
- //               this.disabled_features.Add(disabled_features_element);
- //           }
- //       }
+            writer.Write(this.chat_big_size);
+            writer.Write(this.chat_size_max);
+            writer.Write(this.broadcast_size_max);
 
-	//	public override string ToString()
-	//	{
-	//		return String.Format("(config date:{0} expires:{1} test_mode:{2} this_dc:{3} dc_options:{4} chat_big_size:{5} chat_size_max:{6} broadcast_size_max:{7} disabled_features:{8})",
- //               date, expires, test_mode, this_dc, Serializers.VectorToString(dc_options), chat_big_size, chat_size_max, broadcast_size_max, Serializers.VectorToString(disabled_features));
-	//	}
-	//}
+            writer.Write(0x1cb5c415);
+            writer.Write(this.disabled_features.Count);
+            foreach (DisabledFeature disabled_features_element in this.disabled_features)
+            {
+                disabled_features_element.Write(writer);
+            }
+        }
+
+        public override void Read(BinaryReader reader)
+        {
+            this.date = reader.ReadInt32();
+            this.expires = reader.ReadInt32();
+            this.test_mode = reader.ReadUInt32() == 0x997275b5;
+            this.this_dc = reader.ReadInt32();
+
+            reader.ReadInt32(); // vector code
+            int dc_options_len = reader.ReadInt32();
+            this.dc_options = new List<DcOption>(dc_options_len);
+            for (int dc_options_index = 0; dc_options_index < dc_options_len; dc_options_index++)
+            {
+                DcOption dc_options_element;
+                dc_options_element = TL.Parse<DcOption>(reader);
+                this.dc_options.Add(dc_options_element);
+            }
+
+            this.chat_big_size = reader.ReadInt32();
+            this.chat_size_max = reader.ReadInt32();
+            this.broadcast_size_max = reader.ReadInt32();
+
+            reader.ReadInt32(); // vector code
+            int disabled_features_len = reader.ReadInt32();
+            this.disabled_features = new List<DisabledFeature>(disabled_features_len);
+            for (int disabled_features_index = 0; disabled_features_index < disabled_features_len; disabled_features_index++)
+            {
+                DisabledFeature disabled_features_element;
+                disabled_features_element = TL.Parse<DisabledFeature>(reader);
+                this.disabled_features.Add(disabled_features_element);
+            }
+        }
+
+        public override string ToString()
+        {
+            return String.Format("(config date:{0} expires:{1} test_mode:{2} this_dc:{3} dc_options:{4} chat_big_size:{5} chat_size_max:{6} broadcast_size_max:{7} disabled_features:{8})",
+                date, expires, test_mode, this_dc, Serializers.VectorToString(dc_options), chat_big_size, chat_size_max, broadcast_size_max, Serializers.VectorToString(disabled_features));
+        }
+    }
 
     public class NearestDcConstructor : NearestDc
 	{

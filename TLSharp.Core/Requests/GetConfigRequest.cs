@@ -8,7 +8,7 @@ namespace TLSharp.Core.Requests
 {
 	public class GetConfigRequest : MTProtoRequest
 	{
-        public Config configuration;
+        public InfoConfig configuration;
 
 
 		public GetConfigRequest() { }
@@ -20,9 +20,9 @@ namespace TLSharp.Core.Requests
 
 		public override void OnResponse(BinaryReader reader)
 		{
-            var code = reader.ReadUInt32(); // 0x7dae33e0
+            //ar code = reader.ReadUInt32(); // 0x7dae33e0
 
-            configuration = TL.Parse<Config>(reader);
+            configuration = TL.Parse<InfoConfig>(reader);
 		}
 
 		public override void OnException(Exception exception)
