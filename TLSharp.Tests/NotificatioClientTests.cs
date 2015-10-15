@@ -122,6 +122,19 @@ namespace TLSharp.Tests
 
 			Assert.IsTrue(await client.Connect());
 		}
+		
+		[TestMethod]
+	        public async Task TestConfig()
+	        {
+	            var store = new FileSessionStore();
+	            var client = new TelegramClient(store, "session");
+	
+	            await client.Connect();
+	
+	            var config = await client.getConfig();
+	
+	            Assert.IsNotNull(config);
+	        }
 
 		[TestMethod]
 		public async Task AuthenticationWorks()
